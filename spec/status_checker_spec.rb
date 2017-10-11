@@ -13,6 +13,10 @@ RSpec.describe StatusChecker do
       it "returns non nil" do
         expect(service.call).to_not eq nil
       end
+
+      it "has no errors" do
+        expect(service.errors).to be_empty
+      end
     end
 
     context "when called with invalid site" do
