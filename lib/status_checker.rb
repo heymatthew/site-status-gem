@@ -1,4 +1,5 @@
 require "net/http"
+require "benchmark"
 require_relative "data_point"
 
 StatusChecker = Struct.new(:site) do
@@ -6,7 +7,13 @@ StatusChecker = Struct.new(:site) do
     check_errors
     return nil if errors.any?
 
-    DataPoint.new(response, 20) # TODO stub content
+    DataPoint.new.tap do |data|
+      bench = Benchmark.measure do
+        data[:response] = response
+      end
+
+      #data[:time] = bench.total
+    end
   end
 
   def errors

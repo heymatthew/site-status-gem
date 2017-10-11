@@ -1,3 +1,4 @@
+require "benchmark"
 require_relative '../lib/status_checker'
 
 RSpec.describe StatusChecker do
@@ -11,7 +12,10 @@ RSpec.describe StatusChecker do
   describe "#call" do
     context "happy path" do
       let(:mock_response) { double(Net::HTTPResponse, :code => "302") }
-      before { expect(Net::HTTP).to receive(:get_response).and_return(mock_response) }
+      before do
+        expect(Net::HTTP).to receive(:get_response).and_return(mock_response)
+        expect(Benchmark).to receive(:measure)
+      end
 
       it "returns numeric result" do
         expect(service.call).to be_kind_of(StatusChecker::DataPoint)
