@@ -11,7 +11,7 @@ RSpec.describe StatusChecker do
   describe "#call" do
     context "happy path" do
       it "returns numeric result" do
-        expect(service.call).to be_kind_of(Integer)
+        expect(service.call).to be_kind_of(StatusChecker::DataPoint)
       end
 
       it "has no errors" do

@@ -1,11 +1,13 @@
 require "net/http"
 
 StatusChecker = Struct.new(:site) do
+  DataPoint = Struct.new(:response_code, :time)
+
   def call
     check_errors
     return nil if errors.any?
 
-    response.code.to_i
+    DataPoint.new(20, 20) # TODO stub content
   end
 
   def errors
