@@ -1,8 +1,7 @@
 require "net/http"
+require_relative "data_point"
 
 StatusChecker = Struct.new(:site) do
-  DataPoint = Struct.new(:response, :time)
-
   def call
     check_errors
     return nil if errors.any?
