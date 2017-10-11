@@ -18,4 +18,13 @@ RSpec.describe Uptime::DataPoint do
       expect(data.response_code).to be_kind_of(Numeric)
     end
   end
+
+  describe "#time_ms" do
+    let(:time)                { 0.2 } # seconds
+    let(:milliseconds_format) { "200ms" }
+
+    it "converts seconds given to milliseconds format" do
+      expect(data.time_ms).to eq milliseconds_format
+    end
+  end
 end
