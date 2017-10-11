@@ -1,0 +1,1 @@
+StatusChecker = Struct.new(:site)
