@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
                     lib/uptime/data_point.rb
                     lib/uptime/status_checker.rb
                   }
+  s.executables = "site-status"
   s.email       = "code@matthew.nz"
   s.homepage    = "https://github.com/heymatthew/status-gem"
   s.license       = 'MIT'

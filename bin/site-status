@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "uptime/status_checker"
+
+check = Uptime::StatusChecker.new("https://gitlab.com")
+puts check.call
