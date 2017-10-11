@@ -1,7 +1,9 @@
+require "net/http"
+
 StatusChecker = Struct.new(:site) do
   def call
     check_errors
-    "200 ok" unless errors.any?
+    response unless errors.any?
   end
 
   def errors
@@ -9,6 +11,14 @@ StatusChecker = Struct.new(:site) do
   end
 
   private
+
+  def response
+    Net::HTTP.get_response(site_uri)
+  end
+
+  def site_uri
+    URI(site)
+  end
 
   def check_errors
     if site.nil?
