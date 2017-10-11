@@ -1,7 +1,7 @@
 default: clean build
 
 clean:
-	rm *.gem
+	rm *.gem || echo "no gem files"
 
 build:
 	gem build status_checker.gemspec

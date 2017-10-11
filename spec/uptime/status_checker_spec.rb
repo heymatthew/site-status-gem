@@ -1,9 +1,9 @@
 require "benchmark"
-require_relative '../lib/status_checker'
+require "uptime/status_checker"
 
-RSpec.describe StatusChecker do
+RSpec.describe Uptime::StatusChecker do
   let(:site) { "https://gitlab.com" }
-  subject(:service) { StatusChecker.new(site) }
+  subject(:service) { Uptime::StatusChecker.new(site) }
 
   it "stores site" do
     expect(service.site).to eq site
@@ -18,7 +18,7 @@ RSpec.describe StatusChecker do
         before { expect(Net::HTTP).to receive(:get_response).and_return(mock_response) }
 
         it "returns datapoint result" do
-          expect(service.call).to be_kind_of(DataPoint)
+          expect(service.call).to be_kind_of(Uptime::DataPoint)
         end
 
         it "has no errors" do

@@ -1,9 +1,9 @@
-require_relative '../lib/data_point'
+require "uptime/data_point"
 
-RSpec.describe DataPoint do
+RSpec.describe Uptime::DataPoint do
   let(:response) { "STUB RESPONSE" }
   let(:time) { "STUB TIME" }
-  subject(:data) { DataPoint.new(response, time) }
+  subject(:data) { Uptime::DataPoint.new(response, time) }
 
   it "stores response and time" do
     expect(data.response).to be response
