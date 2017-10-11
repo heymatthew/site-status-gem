@@ -3,7 +3,9 @@ require "net/http"
 StatusChecker = Struct.new(:site) do
   def call
     check_errors
-    response.code.to_i unless errors.any?
+    return nil if errors.any?
+
+    response.code.to_i
   end
 
   def errors
