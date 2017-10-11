@@ -22,17 +22,22 @@ StatusChecker = Struct.new(:site) do
 
   private
 
+  def check_errors
+    if site.nil?
+      errors << "Site cannot be nil"
+      return # basic failure, just stop processing
+    end
+
+    if site_uri.host.nil?
+      errors << "Cannot parse #{site}, invalid format"
+    end
+  end
+
   def response
     Net::HTTP.get_response(site_uri)
   end
 
   def site_uri
     URI(site)
-  end
-
-  def check_errors
-    if site.nil?
-      errors << "Site cannot be nil"
-    end
   end
 end

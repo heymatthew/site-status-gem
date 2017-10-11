@@ -14,10 +14,10 @@ RSpec.describe StatusChecker do
       let(:mock_response) { double(Net::HTTPResponse, :code => "302") }
       before do
         expect(Net::HTTP).to receive(:get_response).and_return(mock_response)
-        expect(Benchmark).to receive(:measure)
+        expect(Benchmark).to receive(:measure).and_call_original
       end
 
-      it "returns numeric result" do
+      it "returns datapoint result" do
         expect(service.call).to be_kind_of(StatusChecker::DataPoint)
       end
 
@@ -28,17 +28,31 @@ RSpec.describe StatusChecker do
       end
     end
 
-    context "when called with invalid site" do
-      let(:site) { nil }
+    context "when site is invalid" do
+      let(:site) { "asdf" }
 
       it "bails, returning nil" do
         expect(service.call).to eq nil
       end
 
-      it "sets errors" do
-        expect { service.call }
-          .to change { service.errors }
-          .to include(/nil/)
+      context "and set to nil" do
+        let(:site) { nil }
+
+        it "sets errors" do
+          expect { service.call }
+            .to change { service.errors }
+            .to include(/nil/)
+        end
+      end
+
+      context "and set to invalid domain" do
+        let(:site) { "asdf" }
+
+        it "complains about url format" do
+          expect { service.call }
+            .to change { service.errors }
+            .to include(/format/)
+        end
       end
     end
   end
