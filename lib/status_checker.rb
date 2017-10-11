@@ -1,5 +1,5 @@
 StatusChecker = Struct.new(:site) do
   def call
-    return site && "200 ok"
+    "200 ok" if site
   end
 end
