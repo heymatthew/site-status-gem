@@ -12,19 +12,30 @@ RSpec.describe StatusChecker do
   describe "#call" do
     context "happy path" do
       let(:mock_response) { double(Net::HTTPResponse, :code => "302") }
-      before do
-        expect(Net::HTTP).to receive(:get_response).and_return(mock_response)
-        expect(Benchmark).to receive(:measure).and_call_original
+
+      context "setting response" do
+        before { expect(Benchmark).to receive(:measure).and_call_original }
+        before { expect(Net::HTTP).to receive(:get_response).and_return(mock_response) }
+
+        it "returns datapoint result" do
+          expect(service.call).to be_kind_of(DataPoint)
+        end
+
+        it "has no errors" do
+          expect { service.call }
+            .to_not change { service.errors.any? }
+            .from(false)
+        end
       end
 
-      it "returns datapoint result" do
-        expect(service.call).to be_kind_of(StatusChecker::DataPoint)
-      end
+      context "setting time" do
+        let(:time_in_seconds) { 0.03 } # seconds
+        let(:mock_benchmark) { double(Benchmark::Tms, :total => time_in_seconds) }
+        before { expect(Benchmark).to receive(:measure).and_return(mock_benchmark) }
 
-      it "has no errors" do
-        expect { service.call }
-          .to_not change { service.errors.any? }
-          .from(false)
+        it "sets time" do
+          expect(service.call.time).to eq time_in_seconds
+        end
       end
     end
 

@@ -12,7 +12,7 @@ StatusChecker = Struct.new(:site) do
         data[:response] = response
       end
 
-      #data[:time] = bench.total
+      data[:time] = bench.total
     end
   end
 
