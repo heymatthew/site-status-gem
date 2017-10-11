@@ -10,7 +10,9 @@ RSpec.describe DataPoint do
     expect(data.time).to be time
   end
 
-  it "looks up response code" do
-    expect(data.response_code).to be_kind_of(Numeric)
+  describe "#response_code" do
+    it "looks up response code" do
+      expect(data.response_code).to be_kind_of(Numeric)
+    end
   end
 end
