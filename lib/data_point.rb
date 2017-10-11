@@ -1,5 +1,5 @@
   DataPoint = Struct.new(:response, :time) do
     def response_code
-      200
+      response.code.to_i
     end
   end

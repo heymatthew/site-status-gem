@@ -11,6 +11,9 @@ RSpec.describe DataPoint do
   end
 
   describe "#response_code" do
+    let(:response) { double(Net::HTTPResponse, :code => "302") }
+    before { expect(response).to receive(:code) }
+
     it "looks up response code" do
       expect(data.response_code).to be_kind_of(Numeric)
     end
