@@ -10,8 +10,8 @@ RSpec.describe StatusChecker do
 
   describe "#call" do
     context "happy path" do
-      it "returns non nil" do
-        expect(service.call).to_not eq nil
+      it "returns numeric result" do
+        expect(service.call).to be_kind_of(Integer)
       end
 
       it "has no errors" do
