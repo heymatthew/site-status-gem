@@ -25,6 +25,12 @@ RSpec.describe StatusChecker do
       it "bails, returning nil" do
         expect(service.call).to eq nil
       end
+
+      it "sets errors" do
+        expect { service.call }
+          .to change { service.errors.any? }
+          .to(true)
+      end
     end
   end
 end
