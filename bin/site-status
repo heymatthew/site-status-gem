@@ -5,5 +5,13 @@ require "uptime/status_checker"
 site = "https://gitlab.com" # default
 site = ARGV.first if ARGV.any?
 
-check = Uptime::StatusChecker.new(site)
-puts check.call
+status_checker = Uptime::StatusChecker.new(site)
+
+if result = status_checker.call
+  puts result
+else
+  puts "There were errors while trying to check the status of that site"
+  status_checker.errors.each do |e|
+    puts e
+  end
+end
