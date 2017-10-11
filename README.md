@@ -13,8 +13,8 @@ e.g.
 site-status
 => 302 20ms
 
-site-status https://matthew.nz
-=> 302 30ms
+site-status https://github.com/heymatthew
+=> 200 210ms
 ```
 
 ## Installation
