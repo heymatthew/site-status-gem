@@ -7,7 +7,7 @@ StatusChecker = Struct.new(:site) do
     check_errors
     return nil if errors.any?
 
-    DataPoint.new(20, 20) # TODO stub content
+    DataPoint.new(response.code, 20) # TODO stub content
   end
 
   def errors
