@@ -1,5 +1,9 @@
 module Uptime
   DataPoint = Struct.new(:response, :time) do
+    def to_s
+      "#{response_code} #{time_ms}"
+    end
+
     def response_code
       response.code.to_i
     end
