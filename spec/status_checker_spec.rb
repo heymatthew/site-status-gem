@@ -28,8 +28,8 @@ RSpec.describe StatusChecker do
 
       it "sets errors" do
         expect { service.call }
-          .to change { service.errors.any? }
-          .to(true)
+          .to change { service.errors }
+          .to include(/nil/)
       end
     end
   end
