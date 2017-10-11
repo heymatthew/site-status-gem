@@ -14,5 +14,13 @@ RSpec.describe StatusChecker do
         expect(service.call).to_not eq nil
       end
     end
+
+    context "when called with invalid site" do
+      let(:site) { nil }
+
+      it "bails, returning nil" do
+        expect(service.call).to eq nil
+      end
+    end
   end
 end
