@@ -2,5 +2,8 @@
 
 require "uptime/status_checker"
 
-check = Uptime::StatusChecker.new("https://gitlab.com")
+site = "https://gitlab.com" # default
+site = ARGV.first if ARGV.any?
+
+check = Uptime::StatusChecker.new(site)
 puts check.call
