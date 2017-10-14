@@ -13,7 +13,7 @@ module Uptime
           data[:response] = response
         end
 
-        data[:time] = bench.total
+        data[:seconds] = bench.total
       end
     end
 

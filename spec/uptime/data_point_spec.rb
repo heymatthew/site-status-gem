@@ -2,12 +2,12 @@ require "uptime/data_point"
 
 RSpec.describe Uptime::DataPoint do
   let(:response) { "STUB RESPONSE" }
-  let(:time) { 0.1 } # seconds
-  subject(:data) { Uptime::DataPoint.new(response, time) }
+  let(:seconds) { 0.1 }
+  subject(:data) { Uptime::DataPoint.new(response, seconds) }
 
-  it "stores response and time" do
+  it "stores response and seconds" do
     expect(data.response).to be response
-    expect(data.time).to be time
+    expect(data.seconds).to be seconds
   end
 
   describe "#response_code" do
@@ -20,7 +20,7 @@ RSpec.describe Uptime::DataPoint do
   end
 
   describe "#time_ms" do
-    let(:time)                { 0.2 } # seconds
+    let(:seconds)             { 0.2 } # seconds
     let(:milliseconds_format) { "200ms" }
 
     it "converts seconds given to milliseconds format" do

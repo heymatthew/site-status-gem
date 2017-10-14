@@ -28,13 +28,13 @@ RSpec.describe Uptime::StatusChecker do
         end
       end
 
-      context "setting time" do
+      context "setting seconds" do
         let(:time_in_seconds) { 0.03 } # seconds
         let(:mock_benchmark) { double(Benchmark::Tms, :total => time_in_seconds) }
         before { expect(Benchmark).to receive(:measure).and_return(mock_benchmark) }
 
-        it "sets time" do
-          expect(service.call.time).to eq time_in_seconds
+        it "sets seconds" do
+          expect(service.call.seconds).to eq time_in_seconds
         end
       end
     end
